@@ -1,0 +1,8 @@
+data/
+old_model/
+models/best_model.pth
+__pycache__/
+*.pyc
+*.pth
+.vscode/
+.ipynb_checkpoints/
