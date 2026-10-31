@@ -1,8 +1,10 @@
 data/
 old_model/
 models/best_model.pth
+models/combined/
 __pycache__/
 *.pyc
-*.pth
 .vscode/
 .ipynb_checkpoints/
+yolov8n.pt
+weights/

@@ -9,7 +9,7 @@
 
 from ultralytics import YOLO
 
-DATA_YAML  = r"C:\Users\ravib\ML_Fish_Classifier\detection\data.yaml"
+DATA_YAML = r"C:\Users\ravib\ML_Fish_Classifier\detection\data.yaml"
 MODEL_DIR  = r"C:\Users\ravib\ML_Fish_Classifier\models"
 EPOCHS     = 50
 IMG_SIZE   = 640
