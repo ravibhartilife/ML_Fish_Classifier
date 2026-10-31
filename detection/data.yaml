@@ -1,0 +1,8 @@
+path: C:\Users\ravib\ML_Data_Set\Etroplus_maculatus
+
+train: Train/images
+val: Valid/images
+test: Test/images
+
+nc: 1
+names: ['Fish']
