@@ -164,15 +164,21 @@ Est. Total Fish : 4,500 in pond
 
 ---
 
-## Roadmap
+### Roadmap
 - [x] Species classification (73 species)
 - [x] Fish detection (YOLOv8)
 - [x] Species identification per detection
+- [x] Unknown species handling
 - [x] Density estimation
 - [x] Spatial heat map
-- [x] Fish tracking (ByteTrack) — avoid double counting in video
-- [ ] Water quality IoT integration
-- [ ] GIS mapping
+- [x] Fish tracking (ByteTrack)
+- [x] Water quality integration
+- [x] Integrated report
+- [x] GIS mapping
+- [ ] REST API (FastAPI)
+- [ ] Streamlit frontend
+- [ ] Mobile app
+
 
 ### 6. Fish Tracking (Video)
 ```bash
@@ -200,3 +206,222 @@ Unique fish tracked : 368
 - ByteTrack assigns unique ID to each fish
 - Same fish keeps same ID across frames
 - Only new IDs counted → no double counting
+
+### 7. GIS Mapping
+```bash
+python src/gis_map.py \
+  --lat 23.4120 \
+  --lon 85.3094 \
+  --location "Kanke Dam, Ranchi" \
+  --total 27 \
+  --density 2.25 \
+  --ph 7.59 \
+  --water_safe 1 \
+  --species_json '{"Catfish":3,"Goby":3,"Glass Perchlet":9}'
+```
+Serve the output map:
+```bash
+cd models/gis
+python -m http.server 8080
+# Open: http://localhost:8080/fish_gis_map.html
+```
+
+### 8. Integrated Report (All-in-One)
+```bash
+python src/integrated_report.py \
+  --image "path/to/pond.jpg" \
+  --turbidity 3.9 \
+  --hardness 196 \
+  --tds 500 \
+  --depth 2 \
+  --fov 90 \
+  --pond_area 2000
+```
+
+---
+
+## Building a Frontend / UI
+
+### What data the backend returns
+
+**Fish Classification** (`src/classification/predict.py`):
+```json
+{
+  "predicted": "Catfish",
+  "confidence": 96.83,
+  "top5": [
+    {"species": "Catfish",       "confidence": 96.83},
+    {"species": "Mudfish",       "confidence": 1.36},
+    {"species": "Perch",         "confidence": 0.58},
+    {"species": "Silver Perch",  "confidence": 0.49},
+    {"species": "Freshwater Eel","confidence": 0.25}
+  ]
+}
+```
+
+**Fish Detection + Count** (`src/detection/count_fish.py`):
+```json
+{
+  "total_fish": 27,
+  "species_count": {
+    "Glass Perchlet": 9,
+    "Gold Fish": 4,
+    "Goby": 3,
+    "Unknown": 8
+  }
+}
+```
+
+**Density Estimation** (`src/detection/density.py`):
+```json
+{
+  "camera_area_m2": 12.0,
+  "areal_density": 2.25,
+  "estimated_total_fish": 4500,
+  "species_density": {
+    "Glass Perchlet": 0.75,
+    "Gold Fish": 0.33
+  }
+}
+```
+
+**Water Quality** (`water_quality/main.py`):
+```json
+{
+  "safe": true,
+  "potability": 1,
+  "predicted_ph": 7.59,
+  "message": "Safe to drink ✅"
+}
+```
+
+---
+
+### How to expose as REST API
+
+Install FastAPI:
+```bash
+pip install fastapi uvicorn python-multipart
+```
+
+Create `api.py` in project root:
+```python
+from fastapi import FastAPI, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
+import shutil, os, sys
+sys.path.append("src/detection")
+sys.path.append("src/classification")
+from count_fish import count_fish
+from density import estimate_density
+
+app = FastAPI(title="ML Fish Classifier API")
+
+app.add_middleware(CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"])
+
+@app.post("/detect")
+async def detect(file: UploadFile = File(...)):
+    # Save uploaded image
+    path = f"temp_{file.filename}"
+    with open(path, "wb") as f:
+        shutil.copyfileobj(file.file, f)
+    # Run detection
+    result = count_fish(path)
+    os.remove(path)
+    return result
+
+@app.post("/density")
+async def density(file: UploadFile = File(...),
+                  depth: float = 2.0,
+                  fov: float = 90.0,
+                  pond_area: float = 2000.0):
+    path = f"temp_{file.filename}"
+    with open(path, "wb") as f:
+        shutil.copyfileobj(file.file, f)
+    result = estimate_density(path, depth, fov, pond_area)
+    os.remove(path)
+    return result
+```
+
+Run API:
+```bash
+uvicorn api:app --reload
+# API docs at: http://localhost:8000/docs
+```
+
+---
+
+### How to call from frontend (JavaScript)
+
+**Single image:**
+```javascript
+const formData = new FormData();
+formData.append("file", imageFile);  // from <input type="file">
+
+const response = await fetch("http://localhost:8000/detect", {
+    method: "POST",
+    body: formData
+});
+const data = await response.json();
+console.log(data.total_fish);
+console.log(data.species_count);
+```
+
+**With density:**
+```javascript
+const response = await fetch(
+    "http://localhost:8000/density?depth=2&fov=90&pond_area=2000",
+    { method: "POST", body: formData }
+);
+```
+
+---
+
+### Recommended Frontend Stack
+
+| Purpose | Tool |
+|---|---|
+| Quick demo UI | Streamlit |
+| Web app | React + Axios |
+| Mobile app | Flutter |
+| Dashboard | Grafana |
+
+**Streamlit (easiest — 30 lines):**
+```bash
+pip install streamlit
+```
+```python
+import streamlit as st
+import requests
+
+st.title("🐟 Fish Classifier")
+
+uploaded = st.file_uploader("Upload fish image", 
+                             type=["jpg","png","jpeg"])
+if uploaded:
+    res = requests.post("http://localhost:8000/detect",
+                        files={"file": uploaded})
+    data = res.json()
+    st.write(f"Total fish: {data['total_fish']}")
+    st.bar_chart(data['species_count'])
+```
+Run:
+```bash
+streamlit run app.py
+```
+
+---
+
+### Input formats supported
+
+| Input | Script | How to pass |
+|---|---|---|
+| Single image | `predict.py`, `count_fish.py`, `density.py` | `--image path/to/fish.jpg` |
+| Video file | `track_fish.py` | `--video path/to/video.mp4` |
+| Water params | `integrated_report.py` | `--turbidity 3.9 --hardness 196 --tds 500` |
+| GPS location | `gis_map.py` | `--lat 23.41 --lon 85.30 --location "Pond name"` |
+| Species data | `gis_map.py` | `--species_json '{"Catfish":9}'` |
+
+---
