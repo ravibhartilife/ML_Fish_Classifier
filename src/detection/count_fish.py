@@ -16,7 +16,7 @@ from ultralytics import YOLO
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'classification'))
-from model import build_model
+from model import build_model  # noqa: E402
 from collections import Counter
 
 # ── Configuration ─────────────────────────────────────────────
