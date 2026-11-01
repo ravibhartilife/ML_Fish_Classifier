@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f0352bc3f352519b8366d2b25e3babf6 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+    <div style="position:fixed; bottom:30px; left:30px;
+                background:white; padding:15px;
+                border:2px solid grey; border-radius:8px;
+                font-size:13px; z-index:1000;">
+        <b>🐟 Fish Detection Report</b><br>
+        Total fish : 27<br>
+        Density    : 2.2500 fish/m²<br>
+        <br>
+        <b>💧 Water Quality</b><br>
+        pH         : 7.59<br>
+        Safe       : ✅<br>
+        <br>
+        <b>📍 Location</b><br>
+        Kanke Dam, Ranchi<br>
+        23.412°N, 85.3094°E
+    </div>
+    
+    
+    <div style='position:fixed; top:30px; right:30px;
+                background:white; padding:10px;
+                border:1px solid grey; border-radius:8px;
+                font-size:12px; z-index:1000;'>
+    <b>Species Legend</b><br>
+    <span style='color:red'>●</span> Catfish: 3<br><span style='color:blue'>●</span> Goby: 3<br><span style='color:darkred'>●</span> Glass Perchlet: 9<br><span style='color:cadetblue'>●</span> Gold Fish: 4<br><span style='color:gray'>●</span> Unknown: 8<br></div>
+    
+            <div class="folium-map" id="map_f0352bc3f352519b8366d2b25e3babf6" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_f0352bc3f352519b8366d2b25e3babf6 = L.map(
+                "map_f0352bc3f352519b8366d2b25e3babf6",
+                {
+                    center: [23.412, 85.3094],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 16,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_23130fe346adc9bba539db7d02855dd2 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "OpenStreetMap",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_23130fe346adc9bba539db7d02855dd2.addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+            var polygon_a98ada076ec1500cb106af0f0c10a4a4 = L.polygon(
+                [[23.415, 85.3064], [23.415, 85.3124], [23.409, 85.3124], [23.409, 85.3064]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightblue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_d4890cd5a139b81d29ff9eb510fbd320 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1b803b8a78bd47beeb5c910c20eca8fa = $(`<div id="html_1b803b8a78bd47beeb5c910c20eca8fa" style="width: 100.0%; height: 100.0%;">Pond Boundary — Kanke Dam, Ranchi</div>`)[0];
+                popup_d4890cd5a139b81d29ff9eb510fbd320.setContent(html_1b803b8a78bd47beeb5c910c20eca8fa);
+            
+        
+
+        polygon_a98ada076ec1500cb106af0f0c10a4a4.bindPopup(popup_d4890cd5a139b81d29ff9eb510fbd320)
+        ;
+
+        
+    
+    
+            var marker_72135314ca183503a0d289dba080266d = L.marker(
+                [23.412, 85.3094],
+                {
+}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+            var icon_34521161af3d89ebc3e0ced8e80b40bc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d9cf826fdbcd698ba7ff0078e5810942 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b3e48c304a152913302ac9f829c773ea = $(`<div id="html_b3e48c304a152913302ac9f829c773ea" style="width: 100.0%; height: 100.0%;">📍 Kanke Dam, Ranchi</div>`)[0];
+                popup_d9cf826fdbcd698ba7ff0078e5810942.setContent(html_b3e48c304a152913302ac9f829c773ea);
+            
+        
+
+        marker_72135314ca183503a0d289dba080266d.bindPopup(popup_d9cf826fdbcd698ba7ff0078e5810942)
+        ;
+
+        
+    
+    
+            marker_72135314ca183503a0d289dba080266d.bindTooltip(
+                `<div>
+                     Kanke Dam, Ranchi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_72135314ca183503a0d289dba080266d.setIcon(icon_34521161af3d89ebc3e0ced8e80b40bc);
+            
+    
+            var circle_marker_1aac1218a32f2bfe6fda0da14b75089c = L.circleMarker(
+                [23.41255770719383, 85.30750004302088],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_7f619936dd1995956d65dcbb6fb6a62c = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_da822e02650b0c9595760c12afd87894 = $(`<div id="html_da822e02650b0c9595760c12afd87894" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Glass Perchlet<br><b>Location:</b> 23.4126°N, 85.3075°E</div>`)[0];
+                popup_7f619936dd1995956d65dcbb6fb6a62c.setContent(html_da822e02650b0c9595760c12afd87894);
+            
+        
+
+        circle_marker_1aac1218a32f2bfe6fda0da14b75089c.bindPopup(popup_7f619936dd1995956d65dcbb6fb6a62c)
+        ;
+
+        
+    
+    
+            circle_marker_1aac1218a32f2bfe6fda0da14b75089c.bindTooltip(
+                `<div>
+                     Glass Perchlet
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_60807093cb2cdec2c345af8b3d2414d6 = L.circleMarker(
+                [23.411100117273474, 85.3082928429526],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_79aa9b41903199055cc7abc854ba59c5 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_57b8c1e567984163b67e8d6736dd1437 = $(`<div id="html_57b8c1e567984163b67e8d6736dd1437" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Glass Perchlet<br><b>Location:</b> 23.4111°N, 85.3083°E</div>`)[0];
+                popup_79aa9b41903199055cc7abc854ba59c5.setContent(html_57b8c1e567984163b67e8d6736dd1437);
+            
+        
+
+        circle_marker_60807093cb2cdec2c345af8b3d2414d6.bindPopup(popup_79aa9b41903199055cc7abc854ba59c5)
+        ;
+
+        
+    
+    
+            circle_marker_60807093cb2cdec2c345af8b3d2414d6.bindTooltip(
+                `<div>
+                     Glass Perchlet
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b89943d3cd57162a464ad55eb26d8497 = L.circleMarker(
+                [23.412945884856654, 85.31010679794969],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_d223435f18ab77157397f83ca6e8fb45 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c461bc7c48707e334aa75cbfb9ace4a5 = $(`<div id="html_c461bc7c48707e334aa75cbfb9ace4a5" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Glass Perchlet<br><b>Location:</b> 23.4129°N, 85.3101°E</div>`)[0];
+                popup_d223435f18ab77157397f83ca6e8fb45.setContent(html_c461bc7c48707e334aa75cbfb9ace4a5);
+            
+        
+
+        circle_marker_b89943d3cd57162a464ad55eb26d8497.bindPopup(popup_d223435f18ab77157397f83ca6e8fb45)
+        ;
+
+        
+    
+    
+            circle_marker_b89943d3cd57162a464ad55eb26d8497.bindTooltip(
+                `<div>
+                     Glass Perchlet
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_428a0662de97b5b085d52c8fb7195a9e = L.circleMarker(
+                [23.413568718270817, 85.30774775533051],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_46f53a06b4d21f4fb66cd1d635a3b0d4 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_280e30e9e1ed85bfdc165a017b809391 = $(`<div id="html_280e30e9e1ed85bfdc165a017b809391" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Glass Perchlet<br><b>Location:</b> 23.4136°N, 85.3077°E</div>`)[0];
+                popup_46f53a06b4d21f4fb66cd1d635a3b0d4.setContent(html_280e30e9e1ed85bfdc165a017b809391);
+            
+        
+
+        circle_marker_428a0662de97b5b085d52c8fb7195a9e.bindPopup(popup_46f53a06b4d21f4fb66cd1d635a3b0d4)
+        ;
+
+        
+    
+    
+            circle_marker_428a0662de97b5b085d52c8fb7195a9e.bindTooltip(
+                `<div>
+                     Glass Perchlet
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_75950f73d21162abd4d747da9014234c = L.circleMarker(
+                [23.41168768727874, 85.30751918887775],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_e5500d637de1587e483b86b4cdc26c07 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_cb7b74fb1ed7baa47018930525752210 = $(`<div id="html_cb7b74fb1ed7baa47018930525752210" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Glass Perchlet<br><b>Location:</b> 23.4117°N, 85.3075°E</div>`)[0];
+                popup_e5500d637de1587e483b86b4cdc26c07.setContent(html_cb7b74fb1ed7baa47018930525752210);
+            
+        
+
+        circle_marker_75950f73d21162abd4d747da9014234c.bindPopup(popup_e5500d637de1587e483b86b4cdc26c07)
+        ;
+
+        
+    
+    
+            circle_marker_75950f73d21162abd4d747da9014234c.bindTooltip(
+                `<div>
+                     Glass Perchlet
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_716287d8ec984a474afbcc71dda752b6 = L.circleMarker(
+                [23.410874551899212, 85.30942142115241],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_50cd1a557743bd7cf8590122e651b0ee = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_9bc13ebaacab70832f48965546f725bd = $(`<div id="html_9bc13ebaacab70832f48965546f725bd" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Glass Perchlet<br><b>Location:</b> 23.4109°N, 85.3094°E</div>`)[0];
+                popup_50cd1a557743bd7cf8590122e651b0ee.setContent(html_9bc13ebaacab70832f48965546f725bd);
+            
+        
+
+        circle_marker_716287d8ec984a474afbcc71dda752b6.bindPopup(popup_50cd1a557743bd7cf8590122e651b0ee)
+        ;
+
+        
+    
+    
+            circle_marker_716287d8ec984a474afbcc71dda752b6.bindTooltip(
+                `<div>
+                     Glass Perchlet
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a5944bb43a6c474d0068680a91b74e22 = L.circleMarker(
+                [23.410106143878735, 85.30819535060274],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_af375ffdb4c84b468c332997a2f678d8 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c35aed79857a3627631e43765507c643 = $(`<div id="html_c35aed79857a3627631e43765507c643" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Glass Perchlet<br><b>Location:</b> 23.4101°N, 85.3082°E</div>`)[0];
+                popup_af375ffdb4c84b468c332997a2f678d8.setContent(html_c35aed79857a3627631e43765507c643);
+            
+        
+
+        circle_marker_a5944bb43a6c474d0068680a91b74e22.bindPopup(popup_af375ffdb4c84b468c332997a2f678d8)
+        ;
+
+        
+    
+    
+            circle_marker_a5944bb43a6c474d0068680a91b74e22.bindTooltip(
+                `<div>
+                     Glass Perchlet
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4274afb40de24c5b20c8e6c9daca76da = L.circleMarker(
+                [23.412599537751117, 85.30957976592241],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_074b3da913051de8c6492a306adc2578 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_515d499f8e3bf8475ca2d2a5cdde854f = $(`<div id="html_515d499f8e3bf8475ca2d2a5cdde854f" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Glass Perchlet<br><b>Location:</b> 23.4126°N, 85.3096°E</div>`)[0];
+                popup_074b3da913051de8c6492a306adc2578.setContent(html_515d499f8e3bf8475ca2d2a5cdde854f);
+            
+        
+
+        circle_marker_4274afb40de24c5b20c8e6c9daca76da.bindPopup(popup_074b3da913051de8c6492a306adc2578)
+        ;
+
+        
+    
+    
+            circle_marker_4274afb40de24c5b20c8e6c9daca76da.bindTooltip(
+                `<div>
+                     Glass Perchlet
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_891641c78797c3859514baa272535209 = L.circleMarker(
+                [23.410881762488163, 85.3097570627355],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_d1a8e32b8518d0aea1a0c2a9f3a02404 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c82c8fa537d88a34b45a70e77fae488b = $(`<div id="html_c82c8fa537d88a34b45a70e77fae488b" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Glass Perchlet<br><b>Location:</b> 23.4109°N, 85.3098°E</div>`)[0];
+                popup_d1a8e32b8518d0aea1a0c2a9f3a02404.setContent(html_c82c8fa537d88a34b45a70e77fae488b);
+            
+        
+
+        circle_marker_891641c78797c3859514baa272535209.bindPopup(popup_d1a8e32b8518d0aea1a0c2a9f3a02404)
+        ;
+
+        
+    
+    
+            circle_marker_891641c78797c3859514baa272535209.bindTooltip(
+                `<div>
+                     Glass Perchlet
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4fd4574fc67ca4aeadb4fe0a904295bd = L.circleMarker(
+                [23.41323772182671, 85.30742599503871],
+                {"bubblingMouseEvents": true, "color": "cadetblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_5ecb077e5d7eb94d8a1f99658ebd5046 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_9d657d968ff07969a6292d75487b60dd = $(`<div id="html_9d657d968ff07969a6292d75487b60dd" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Gold Fish<br><b>Location:</b> 23.4132°N, 85.3074°E</div>`)[0];
+                popup_5ecb077e5d7eb94d8a1f99658ebd5046.setContent(html_9d657d968ff07969a6292d75487b60dd);
+            
+        
+
+        circle_marker_4fd4574fc67ca4aeadb4fe0a904295bd.bindPopup(popup_5ecb077e5d7eb94d8a1f99658ebd5046)
+        ;
+
+        
+    
+    
+            circle_marker_4fd4574fc67ca4aeadb4fe0a904295bd.bindTooltip(
+                `<div>
+                     Gold Fish
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_da1fed7f93e1bdfd5f22121dda60a81c = L.circleMarker(
+                [23.41322327700733, 85.31019255757995],
+                {"bubblingMouseEvents": true, "color": "cadetblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_887c99f4b60d54bdd6df4e61718ffaa8 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_571acd92d776c4c3072fd94001bd4d86 = $(`<div id="html_571acd92d776c4c3072fd94001bd4d86" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Gold Fish<br><b>Location:</b> 23.4132°N, 85.3102°E</div>`)[0];
+                popup_887c99f4b60d54bdd6df4e61718ffaa8.setContent(html_571acd92d776c4c3072fd94001bd4d86);
+            
+        
+
+        circle_marker_da1fed7f93e1bdfd5f22121dda60a81c.bindPopup(popup_887c99f4b60d54bdd6df4e61718ffaa8)
+        ;
+
+        
+    
+    
+            circle_marker_da1fed7f93e1bdfd5f22121dda60a81c.bindTooltip(
+                `<div>
+                     Gold Fish
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0a734b1350d5f6a4dfb2be486a140dca = L.circleMarker(
+                [23.41136100206607, 85.30802191799924],
+                {"bubblingMouseEvents": true, "color": "cadetblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_7411e0476c282d91b9ccb1abe81da002 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_b0f8ecd2526495f4b4fa1094206ab5c0 = $(`<div id="html_b0f8ecd2526495f4b4fa1094206ab5c0" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Gold Fish<br><b>Location:</b> 23.4114°N, 85.3080°E</div>`)[0];
+                popup_7411e0476c282d91b9ccb1abe81da002.setContent(html_b0f8ecd2526495f4b4fa1094206ab5c0);
+            
+        
+
+        circle_marker_0a734b1350d5f6a4dfb2be486a140dca.bindPopup(popup_7411e0476c282d91b9ccb1abe81da002)
+        ;
+
+        
+    
+    
+            circle_marker_0a734b1350d5f6a4dfb2be486a140dca.bindTooltip(
+                `<div>
+                     Gold Fish
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d0ae0a5009d40a7e509659d06e0680bf = L.circleMarker(
+                [23.413828852288827, 85.30874637818044],
+                {"bubblingMouseEvents": true, "color": "cadetblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_5933362f5b1be07386e18ccb4819b7f8 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_ce5a011ad7eff7b260fb439ddfc2624c = $(`<div id="html_ce5a011ad7eff7b260fb439ddfc2624c" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Gold Fish<br><b>Location:</b> 23.4138°N, 85.3087°E</div>`)[0];
+                popup_5933362f5b1be07386e18ccb4819b7f8.setContent(html_ce5a011ad7eff7b260fb439ddfc2624c);
+            
+        
+
+        circle_marker_d0ae0a5009d40a7e509659d06e0680bf.bindPopup(popup_5933362f5b1be07386e18ccb4819b7f8)
+        ;
+
+        
+    
+    
+            circle_marker_d0ae0a5009d40a7e509659d06e0680bf.bindTooltip(
+                `<div>
+                     Gold Fish
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5cf6ca98bda18f71d4f9d30e9295e114 = L.circleMarker(
+                [23.410370983373518, 85.30778686550732],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_cc2f54d01b9d5e05b91098ae823b4955 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_b12f08b5bae98aa3e002032128b54fc5 = $(`<div id="html_b12f08b5bae98aa3e002032128b54fc5" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Goby<br><b>Location:</b> 23.4104°N, 85.3078°E</div>`)[0];
+                popup_cc2f54d01b9d5e05b91098ae823b4955.setContent(html_b12f08b5bae98aa3e002032128b54fc5);
+            
+        
+
+        circle_marker_5cf6ca98bda18f71d4f9d30e9295e114.bindPopup(popup_cc2f54d01b9d5e05b91098ae823b4955)
+        ;
+
+        
+    
+    
+            circle_marker_5cf6ca98bda18f71d4f9d30e9295e114.bindTooltip(
+                `<div>
+                     Goby
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_749940e544d7ca7b32680a8d5e5d2a51 = L.circleMarker(
+                [23.41338997746539, 85.30981490412546],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_7c4f4c0cdbabdce6eb6ab664bdfc70be = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_3a2a54ece3f962b323b079d28ed0febd = $(`<div id="html_3a2a54ece3f962b323b079d28ed0febd" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Goby<br><b>Location:</b> 23.4134°N, 85.3098°E</div>`)[0];
+                popup_7c4f4c0cdbabdce6eb6ab664bdfc70be.setContent(html_3a2a54ece3f962b323b079d28ed0febd);
+            
+        
+
+        circle_marker_749940e544d7ca7b32680a8d5e5d2a51.bindPopup(popup_7c4f4c0cdbabdce6eb6ab664bdfc70be)
+        ;
+
+        
+    
+    
+            circle_marker_749940e544d7ca7b32680a8d5e5d2a51.bindTooltip(
+                `<div>
+                     Goby
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d1a622a73756cf18e93c044d8a365dfd = L.circleMarker(
+                [23.413228513093095, 85.31031892714677],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_5927e74e95d25912129c36ec41e4574f = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_94d0069fd5e674bf441d9652c096b6b8 = $(`<div id="html_94d0069fd5e674bf441d9652c096b6b8" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Goby<br><b>Location:</b> 23.4132°N, 85.3103°E</div>`)[0];
+                popup_5927e74e95d25912129c36ec41e4574f.setContent(html_94d0069fd5e674bf441d9652c096b6b8);
+            
+        
+
+        circle_marker_d1a622a73756cf18e93c044d8a365dfd.bindPopup(popup_5927e74e95d25912129c36ec41e4574f)
+        ;
+
+        
+    
+    
+            circle_marker_d1a622a73756cf18e93c044d8a365dfd.bindTooltip(
+                `<div>
+                     Goby
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ce6a7007c6ab4d208f60150a8e9b65be = L.circleMarker(
+                [23.412144912365818, 85.31129246305592],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_bb6b274ac32376012028da546c2a6fb5 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a0c1594f0958d7073fc5c01e4b6e1ddd = $(`<div id="html_a0c1594f0958d7073fc5c01e4b6e1ddd" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Catfish<br><b>Location:</b> 23.4121°N, 85.3113°E</div>`)[0];
+                popup_bb6b274ac32376012028da546c2a6fb5.setContent(html_a0c1594f0958d7073fc5c01e4b6e1ddd);
+            
+        
+
+        circle_marker_ce6a7007c6ab4d208f60150a8e9b65be.bindPopup(popup_bb6b274ac32376012028da546c2a6fb5)
+        ;
+
+        
+    
+    
+            circle_marker_ce6a7007c6ab4d208f60150a8e9b65be.bindTooltip(
+                `<div>
+                     Catfish
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a3f844033fa97a456da496c86a24cdb8 = L.circleMarker(
+                [23.41151413750883, 85.3096081625251],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_d6b680c8c2651f2a55988295a6b6152b = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_942c95dfbf18439d61f1da864edca777 = $(`<div id="html_942c95dfbf18439d61f1da864edca777" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Catfish<br><b>Location:</b> 23.4115°N, 85.3096°E</div>`)[0];
+                popup_d6b680c8c2651f2a55988295a6b6152b.setContent(html_942c95dfbf18439d61f1da864edca777);
+            
+        
+
+        circle_marker_a3f844033fa97a456da496c86a24cdb8.bindPopup(popup_d6b680c8c2651f2a55988295a6b6152b)
+        ;
+
+        
+    
+    
+            circle_marker_a3f844033fa97a456da496c86a24cdb8.bindTooltip(
+                `<div>
+                     Catfish
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f505143d5c85faf7da53cbd4535e3afe = L.circleMarker(
+                [23.41331761865701, 85.30987407900945],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_1e6f89a203df114f4da45140019f1ada = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_82d007e71dcdae376f17ed8c89596f00 = $(`<div id="html_82d007e71dcdae376f17ed8c89596f00" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Catfish<br><b>Location:</b> 23.4133°N, 85.3099°E</div>`)[0];
+                popup_1e6f89a203df114f4da45140019f1ada.setContent(html_82d007e71dcdae376f17ed8c89596f00);
+            
+        
+
+        circle_marker_f505143d5c85faf7da53cbd4535e3afe.bindPopup(popup_1e6f89a203df114f4da45140019f1ada)
+        ;
+
+        
+    
+    
+            circle_marker_f505143d5c85faf7da53cbd4535e3afe.bindTooltip(
+                `<div>
+                     Catfish
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0f1840f24a0acae5f36861cc61b10972 = L.circleMarker(
+                [23.41344682760124, 85.30970940858103],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_3a4434cd1bc1f3430fb89bae8c1b1771 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_77bb8e4420ff6236a32e5d3ad9ccdb52 = $(`<div id="html_77bb8e4420ff6236a32e5d3ad9ccdb52" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Unknown<br><b>Location:</b> 23.4134°N, 85.3097°E</div>`)[0];
+                popup_3a4434cd1bc1f3430fb89bae8c1b1771.setContent(html_77bb8e4420ff6236a32e5d3ad9ccdb52);
+            
+        
+
+        circle_marker_0f1840f24a0acae5f36861cc61b10972.bindPopup(popup_3a4434cd1bc1f3430fb89bae8c1b1771)
+        ;
+
+        
+    
+    
+            circle_marker_0f1840f24a0acae5f36861cc61b10972.bindTooltip(
+                `<div>
+                     Unknown
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c8cac959a19fb912825d2a4b4d488abb = L.circleMarker(
+                [23.41281828734486, 85.30758329753462],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_2fde049cc3a6a649594d751de8cf994b = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_e6751a01f3241eb2cdfd60b792373a08 = $(`<div id="html_e6751a01f3241eb2cdfd60b792373a08" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Unknown<br><b>Location:</b> 23.4128°N, 85.3076°E</div>`)[0];
+                popup_2fde049cc3a6a649594d751de8cf994b.setContent(html_e6751a01f3241eb2cdfd60b792373a08);
+            
+        
+
+        circle_marker_c8cac959a19fb912825d2a4b4d488abb.bindPopup(popup_2fde049cc3a6a649594d751de8cf994b)
+        ;
+
+        
+    
+    
+            circle_marker_c8cac959a19fb912825d2a4b4d488abb.bindTooltip(
+                `<div>
+                     Unknown
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2f725b680fca9f2b5979c7e6db41d8c6 = L.circleMarker(
+                [23.410911593102604, 85.3085575518544],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_7d6c13a0e33e603f9f50a75f01f7bdd3 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_1fc289419d9c9130cbfcbbae8335b19a = $(`<div id="html_1fc289419d9c9130cbfcbbae8335b19a" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Unknown<br><b>Location:</b> 23.4109°N, 85.3086°E</div>`)[0];
+                popup_7d6c13a0e33e603f9f50a75f01f7bdd3.setContent(html_1fc289419d9c9130cbfcbbae8335b19a);
+            
+        
+
+        circle_marker_2f725b680fca9f2b5979c7e6db41d8c6.bindPopup(popup_7d6c13a0e33e603f9f50a75f01f7bdd3)
+        ;
+
+        
+    
+    
+            circle_marker_2f725b680fca9f2b5979c7e6db41d8c6.bindTooltip(
+                `<div>
+                     Unknown
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_873cc89208ea645de15989173c4e039e = L.circleMarker(
+                [23.410319167907694, 85.30833116354545],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_200dc0ee65fd021be3ca87bcf692b87c = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_958542b204257a89e9c897fee1a20ca4 = $(`<div id="html_958542b204257a89e9c897fee1a20ca4" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Unknown<br><b>Location:</b> 23.4103°N, 85.3083°E</div>`)[0];
+                popup_200dc0ee65fd021be3ca87bcf692b87c.setContent(html_958542b204257a89e9c897fee1a20ca4);
+            
+        
+
+        circle_marker_873cc89208ea645de15989173c4e039e.bindPopup(popup_200dc0ee65fd021be3ca87bcf692b87c)
+        ;
+
+        
+    
+    
+            circle_marker_873cc89208ea645de15989173c4e039e.bindTooltip(
+                `<div>
+                     Unknown
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0280e358d12ef94b10b10a8bf6ef4f24 = L.circleMarker(
+                [23.410404005717638, 85.30851189441243],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_854cf3479b135c5012bbe3606d4f007c = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_5b349c34e39a1136bd280b6528de4847 = $(`<div id="html_5b349c34e39a1136bd280b6528de4847" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Unknown<br><b>Location:</b> 23.4104°N, 85.3085°E</div>`)[0];
+                popup_854cf3479b135c5012bbe3606d4f007c.setContent(html_5b349c34e39a1136bd280b6528de4847);
+            
+        
+
+        circle_marker_0280e358d12ef94b10b10a8bf6ef4f24.bindPopup(popup_854cf3479b135c5012bbe3606d4f007c)
+        ;
+
+        
+    
+    
+            circle_marker_0280e358d12ef94b10b10a8bf6ef4f24.bindTooltip(
+                `<div>
+                     Unknown
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_982cbdddc68f041486cda24497021a76 = L.circleMarker(
+                [23.412542737777056, 85.30885932871588],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_db524241f0728010ab6bfbc3e89b86bf = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_94105531c61e746ee25e3f03ca396e26 = $(`<div id="html_94105531c61e746ee25e3f03ca396e26" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Unknown<br><b>Location:</b> 23.4125°N, 85.3089°E</div>`)[0];
+                popup_db524241f0728010ab6bfbc3e89b86bf.setContent(html_94105531c61e746ee25e3f03ca396e26);
+            
+        
+
+        circle_marker_982cbdddc68f041486cda24497021a76.bindPopup(popup_db524241f0728010ab6bfbc3e89b86bf)
+        ;
+
+        
+    
+    
+            circle_marker_982cbdddc68f041486cda24497021a76.bindTooltip(
+                `<div>
+                     Unknown
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1f2ac77f7f353474c81bbe3e320e91eb = L.circleMarker(
+                [23.411480723868465, 85.30823802812309],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_18999a12c821001a13d1e84924740da1 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_af0e686369491f8dbf513c634ae02556 = $(`<div id="html_af0e686369491f8dbf513c634ae02556" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Unknown<br><b>Location:</b> 23.4115°N, 85.3082°E</div>`)[0];
+                popup_18999a12c821001a13d1e84924740da1.setContent(html_af0e686369491f8dbf513c634ae02556);
+            
+        
+
+        circle_marker_1f2ac77f7f353474c81bbe3e320e91eb.bindPopup(popup_18999a12c821001a13d1e84924740da1)
+        ;
+
+        
+    
+    
+            circle_marker_1f2ac77f7f353474c81bbe3e320e91eb.bindTooltip(
+                `<div>
+                     Unknown
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b7a16160e5f25eadbbeec92292697e59 = L.circleMarker(
+                [23.411067911288196, 85.31114661835085],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+        var popup_e89bcd6615bc6c8f8dab206ec5c25428 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c4225bbc7e1dc90b526cb32299b71246 = $(`<div id="html_c4225bbc7e1dc90b526cb32299b71246" style="width: 100.0%; height: 100.0%;"><b>Species:</b> Unknown<br><b>Location:</b> 23.4111°N, 85.3111°E</div>`)[0];
+                popup_e89bcd6615bc6c8f8dab206ec5c25428.setContent(html_c4225bbc7e1dc90b526cb32299b71246);
+            
+        
+
+        circle_marker_b7a16160e5f25eadbbeec92292697e59.bindPopup(popup_e89bcd6615bc6c8f8dab206ec5c25428)
+        ;
+
+        
+    
+    
+            circle_marker_b7a16160e5f25eadbbeec92292697e59.bindTooltip(
+                `<div>
+                     Unknown
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var heat_map_7e86db5ca5c2baf9cc536adfff351b86 = L.heatLayer(
+                [[23.41255770719383, 85.30750004302088], [23.411100117273474, 85.3082928429526], [23.412945884856654, 85.31010679794969], [23.413568718270817, 85.30774775533051], [23.41168768727874, 85.30751918887775], [23.410874551899212, 85.30942142115241], [23.410106143878735, 85.30819535060274], [23.412599537751117, 85.30957976592241], [23.410881762488163, 85.3097570627355], [23.41323772182671, 85.30742599503871], [23.41322327700733, 85.31019255757995], [23.41136100206607, 85.30802191799924], [23.413828852288827, 85.30874637818044], [23.410370983373518, 85.30778686550732], [23.41338997746539, 85.30981490412546], [23.413228513093095, 85.31031892714677], [23.412144912365818, 85.31129246305592], [23.41151413750883, 85.3096081625251], [23.41331761865701, 85.30987407900945], [23.41344682760124, 85.30970940858103], [23.41281828734486, 85.30758329753462], [23.410911593102604, 85.3085575518544], [23.410319167907694, 85.30833116354545], [23.410404005717638, 85.30851189441243], [23.412542737777056, 85.30885932871588], [23.411480723868465, 85.30823802812309], [23.411067911288196, 85.31114661835085]],
+                {
+  "minOpacity": 0.4,
+  "maxZoom": 18,
+  "radius": 20,
+  "blur": 15,
+}
+            );
+        
+    
+            heat_map_7e86db5ca5c2baf9cc536adfff351b86.addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+        
+    
+            var layer_control_b23b35de0f92ae9da1ac8b361e5e5bb5_layers = {
+                base_layers : {
+                    "https://tile.openstreetmap.org/{z}/{x}/{y}.png" : tile_layer_23130fe346adc9bba539db7d02855dd2,
+                },
+                overlays :  {
+                    "Fish Density Heat Map" : heat_map_7e86db5ca5c2baf9cc536adfff351b86,
+                },
+            };
+            let layer_control_b23b35de0f92ae9da1ac8b361e5e5bb5 = L.control.layers(
+                layer_control_b23b35de0f92ae9da1ac8b361e5e5bb5_layers.base_layers,
+                layer_control_b23b35de0f92ae9da1ac8b361e5e5bb5_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_f0352bc3f352519b8366d2b25e3babf6);
+
+        
+</script>
+</html>
