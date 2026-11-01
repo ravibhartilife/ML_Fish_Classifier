@@ -169,6 +169,33 @@ Est. Total Fish : 4,500 in pond
 - [x] Species identification per detection
 - [x] Density estimation
 - [x] Spatial heat map
-- [ ] Fish tracking (ByteTrack) — avoid double counting in video
+- [x] Fish tracking (ByteTrack) — avoid double counting in video
 - [ ] Water quality IoT integration
 - [ ] GIS mapping
+
+### 6. Fish Tracking (Video)
+```bash
+python src/detection/track_fish.py --video "path/to/video.mp4"
+```
+
+**Output:**
+Video : video.mp4
+FPS : 29
+Frames : 457
+
+Frame 30/457 — Fish in frame: 21 — Unique total: 47
+Frame 60/457 — Fish in frame: 18 — Unique total: 58
+...
+=============================================
+FISH TRACKING REPORT
+Total frames processed : 454
+Avg fish per frame : 21.1
+Max fish in one frame : 31
+Unique fish tracked : 368
+
+
+**How it works:**
+- YOLOv8 detects fish in every frame
+- ByteTrack assigns unique ID to each fish
+- Same fish keeps same ID across frames
+- Only new IDs counted → no double counting
