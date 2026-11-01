@@ -59,7 +59,7 @@ def estimate_density(image_path, depth_m, fov_deg, pond_area_m2):
     from PIL import Image
     from torchvision import transforms
     from ultralytics import YOLO
-    from model import build_model
+    from model import build_model   # noqa: E402
 
     # ── Load models ───────────────────────────────────────────
     yolo_model = YOLO(YOLO_MODEL)

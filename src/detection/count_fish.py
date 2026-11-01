@@ -122,6 +122,11 @@ def count_fish(image_path):
 
         # Identify species
         species, conf = identify_species(crop, effnet_model, class_names)
+
+        # If confidence too low → mark as Unknown
+        if conf < 0.50:
+            species = "Unknown"
+
         species_list.append(species)
 
         # Draw box and label on image
