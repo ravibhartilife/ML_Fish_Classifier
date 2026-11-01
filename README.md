@@ -42,33 +42,34 @@ Place both in `models/` folder.
 ---
 
 ## Project Structure
+
+```text
 ML_Fish_Classifier/
 ├── detection/
-│ └── data.yaml # YOLOv8 dataset config
+│   └── data.yaml
 ├── models/
-│ ├── best_model.pth # EfficientNetB0 weights
-│ ├── class_names.json # 73 species names
-│ ├── confusion_matrix.png # evaluation results
-│ └── yolo_fish/ # YOLOv8 training results
+│   ├── best_model.pth
+│   ├── class_names.json
+│   ├── confusion_matrix.png
+│   └── yolo_fish/
 ├── src/
-│ ├── classification/
-│ │ ├── dataset.py # data loading & augmentation
-│ │ ├── model.py # EfficientNetB0 architecture
-│ │ ├── train.py # training loop
-│ │ ├── predict.py # single image inference
-│ │ └── evaluate.py # test set evaluation
-│ ├── detection/
-│ │ ├── train_yolo.py # YOLOv8 training
-│ │ ├── predict_yolo.py # fish detection + counting
-│ │ ├── count_fish.py # detect + identify species
-│ │ ├── density.py # fish density estimation
-│ │ └── heatmap.py # spatial distribution map
-│ └── merge_datasets.py # combine multiple datasets
+│   ├── classification/
+│   │   ├── dataset.py
+│   │   ├── model.py
+│   │   ├── train.py
+│   │   ├── predict.py
+│   │   └── evaluate.py
+│   ├── detection/
+│   │   ├── train_yolo.py
+│   │   ├── predict_yolo.py
+│   │   ├── count_fish.py
+│   │   ├── density.py
+│   │   └── heatmap.py
+│   └── merge_datasets.py
 ├── requirements.txt
 ├── CONTRIBUTING.md
 └── README.md
-
----
+```
 
 ## Setup
 
