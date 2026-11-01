@@ -104,7 +104,11 @@ def estimate_density(image_path, depth_m, fov_deg, pond_area_m2):
             out   = effnet(tensor)
             probs = torch.softmax(out, dim=1)[0]
             idx   = torch.argmax(probs).item()
-        species_list.append(class_names[idx])
+            conf  = probs[idx].item()
+
+        # If confidence too low → mark as Unknown
+        species = class_names[idx] if conf >= 0.50 else "Unknown"
+        species_list.append(species)
 
     # ── Step 3: Calculate camera coverage area ────────────────
     cam_area, width, height = calculate_camera_area(depth_m, fov_deg)
