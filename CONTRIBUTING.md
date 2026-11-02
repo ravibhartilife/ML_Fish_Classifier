@@ -125,3 +125,88 @@ return {
   ]
 }
 ```
+## All Scripts Reference
+
+| Script | Location | Usage |
+|---|---|---|
+| Species classification | `src/classification/predict.py` | `python src/classification/predict.py --image "path"` |
+| Fish detection | `src/detection/predict_yolo.py` | `python src/detection/predict_yolo.py --image "path"` |
+| Detect + identify species | `src/detection/count_fish.py` | `python src/detection/count_fish.py --image "path"` |
+| Density estimation | `src/detection/density.py` | `python src/detection/density.py --image "path" --depth 2 --fov 90 --pond_area 2000` |
+| Heat map | `src/detection/heatmap.py` | `python src/detection/heatmap.py --image "path"` |
+| Fish tracking (video) | `src/detection/track_fish.py` | `python src/detection/track_fish.py --video "path"` |
+| Integrated report | `src/integrated_report.py` | `python src/integrated_report.py --image "path" --turbidity 3.9 --hardness 196 --tds 500` |
+| GIS map | `src/gis_map.py` | `python src/gis_map.py --lat 23.41 --lon 85.30 --location "Pond name"` |
+| Train classification | `src/classification/train.py` | `python src/classification/train.py` |
+| Train detection | `src/detection/train_yolo.py` | `python src/detection/train_yolo.py` |
+| Merge datasets | `src/merge_datasets.py` | `python src/merge_datasets.py` |
+
+## Unknown Species Handling
+
+If a fish species is not in the 73 known species, EfficientNet will label it as **"Unknown"** when confidence is below 50%.
+
+To add new species:
+1. Collect 400+ images of the new species
+2. Add to `C:\Users\ravib\ML_Data_Set\Fish_Image_Data\train\<species_name>\`
+3. Run `python src/classification/train.py`
+
+## Water Quality API
+
+Start the water quality API:
+```bash
+cd water_quality
+pip install fastapi uvicorn
+uvicorn main:app --reload
+```
+API runs at: `http://localhost:8000`
+Docs at: `http://localhost:8000/docs`
+
+Input:
+```json
+{
+  "Turbidity": 3.9,
+  "Hardness": 196.0,
+  "TDS": 500.0
+}
+```
+
+Output:
+```json
+{
+  "safe": true,
+  "potability": 1,
+  "predicted_ph": 7.59,
+  "message": "Safe to drink ✅"
+}
+```
+
+## GIS Map Usage
+
+```bash
+python src/gis_map.py \
+  --lat 23.4120 \
+  --lon 85.3094 \
+  --location "Kanke Dam, Ranchi" \
+  --total 27 \
+  --density 2.25 \
+  --ph 7.59 \
+  --water_safe 1 \
+  --species_json '{"Catfish":3,"Goby":3,"Glass Perchlet":9}'
+```
+
+Serve the map:
+```bash
+cd models/gis
+python -m http.server 8080
+# Open: http://localhost:8080/fish_gis_map.html
+```
+
+## Common Errors
+
+| Error | Fix |
+|---|---|
+| `CUDA not available` | Install correct PyTorch CUDA version |
+| `No module named 'model'` | Run scripts from project root |
+| `FileNotFoundError: best_model.pth` | Download from Google Drive |
+| `Unknown species` | Confidence < 50%, fish not in 73 species |
+| `GIS map blank` | Serve via `python -m http.server 8080` |
